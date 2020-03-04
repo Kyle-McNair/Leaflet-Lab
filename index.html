@@ -3,13 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-            <title>Activity 5</title>
+            <title>Activity 6</title>
 
         <!--put your external stylesheet links here-->
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-  crossorigin=""/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+        <link href="https://fonts.googleapis.com/css?family=Encode+Sans&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="lib/leaflet/leaflet.css">
         <!--[if IE<9]>
             <link rel="stylesheet" href="css/style.ie.css">
@@ -21,25 +20,33 @@
     </head>
 
     <body>
-        <!-- <div class = title> -->
-            <!-- <h1>North America Structures</h1> -->
+        <!-- Create Title -->
+        <div class = title>
+            <h1>High Rises in North America</h1>
         </div>
-        <div id="mapid"></div>
+        <!-- Input the leaflet map -->
+        <div id="mapid" style = "outline-color: #FFF7CC;"></div>
+        <!-- Side Panel to have the photos and panel bar -->
+        <div id = "sidebar">
+            <div style = "text-align: center;">Click on any of the given cities to see more details</div>
+            <div id="panel"></div>
+            <div id="skyline"></div>
+            <div id="info"></div>
+        </div>
+        <!-- Description below the leaflet map -->
+        <div id = "description">
+            Cities in North America display from little, to hundreds of high rise buildings. While there is no distinct classification of how tall a skyscraper is, the universal height to be considered a "skyscraper"
+            is over 100 meters (~330 feet). This map shows a time series of the amount of high rise structures built in each decade. The time spans from the 1890s, all the way to the 2010s. You will find New York to
+            be the dominant home of skyscrapers, but also see other cities build dozens as time passes.
+        </div>
+        <div id="author">Created by Kyle McNair</div>
         
-        <!--put your initial page content here-->
-
-        <!--you can also use this space for internal scripts;
-        place these within <script> tags-->
-
-        <!--put your external script links here-->
+        
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
   crossorigin=""></script>
         <script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
         <script type="text/javascript" src="lib/jquery-3.4.1.js"></script>
-        <!-- <script type="text/javascript" src="js/quickstartTutorial.js"></script> -->
-        <!-- <script type="text/javascript" src="js/geojsonTutorial.js"></script> -->
-        <!-- <script type="text/javascript" src="js/adaptedTutorial.js"></script> -->
         <script type="text/javascript" src="js/main.js"></script>
     </body>
 </html>

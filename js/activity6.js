@@ -4,7 +4,7 @@ var minValue
 
 
 
-//create map
+//step 1 create map
 function createMap(){
     //create the map
     //default coordinates and zoom level when first opened.
@@ -23,7 +23,7 @@ function createMap(){
 
     
 }).addTo(map);
-    //call getData function to get everything added onto the map
+    //call getData function
     getData(map);
 };
 
@@ -35,13 +35,12 @@ function calcMinValue(data){
      //loop through each city
      for(var city of data.features){
           //loop through each year
-          //1890 is the earliest time interval
-          //have it be in increments of 10
           for(var year = 1890; year <= 2010; year+=10){
                 //get population for current year
                var value = city.properties["Built_"+ String(year)+"s"];
-               //if values are not 0, push them to the allValues list
                if(value =! 0)allValues.push(value);
+               //add value to array
+            //    allValues.push(value);
            }
      }
      
@@ -54,36 +53,34 @@ function calcMinValue(data){
 //calculate the radius of each proportional symbol
 function calcPropRadius(attValue) {
         //constant factor adjusts symbol sizes evenly
-        //set min radius value to 6
      var minRadius = 5;
      
      //Flannery Appearance Compensation formula
      var radius = 1.0083 * Math.pow(attValue/minValue,0.5715) * minRadius;
-     //return the radius variable to be used in other functions
      return radius;
     
   
 };
-//process data function goes through the list of attributes given in the geoJson
+
 function processData(data){
-    //creates an empty list
+
     var list = [];
 
     //properties of the first feature in the dataset
     var properties = data.features[0].properties;
-    //for loop to go through each properties that contains the property value of "Built_"
-    //and adds it to the list variable
+
     for (var attribute in properties){
 
         if (attribute.indexOf("Built_") > -1){
             list.push(attribute)
         };
     };
-    //list is returned for other functions
+
+    //check result
+    
     return list;
 };
 
-//function pointToLayer takes the attributes and puts the circle markers onto the map
 function pointToLayer(feature, latlng, list){
     //Determine which attribute to visualize with proportional symbols
     var attribute = list[0];
@@ -107,24 +104,18 @@ function pointToLayer(feature, latlng, list){
 
     //build popup content string
     var popupContent = ("<b>City: </b>"+ feature.properties.City + "<br>");
-    //find the year attribute in the geoJson
+
     var year = attribute.split("Built_")[1];
-    //add the label in the popup content that contains the year
     popupContent += "<b>Skyscrapers built in the " + year + ": </b>" + feature.properties[attribute];
 
     //bind the popup to the circle marker
     layer.bindPopup(popupContent);
-    //variable of the cities in the geoJson
     var cities = feature.properties.City;
     // var skyline = feature.properties.Image
    
-
-    //function where you click on the given cities, a photo of the skyline will appear as well as city name and total structures built
     layer.on({
     click: function(){
-        //skyline tag used to implement the cities being added
         $("#skyline").html(cities);
-        //if statement to go through each city, and inserts an image into the div tag of the #skyline.
         if(cities == "Atlanta"){
             $('#skyline').append('<img id="CityImage" src = "images/Atlanta.jpg">');
             $('#info').html('<p>Total Structures Built (100m+): '+ feature.properties.Total_Structures_100m+ '</p>');
@@ -199,27 +190,25 @@ function pointToLayer(feature, latlng, list){
     
     
 };
-// create proportional symbols option
+
 function createPropSymbols(data, list){
     //create a Leaflet GeoJSON layer and add it to the map
     L.geoJson(data, {
-        //point to layer with the features and the list containing the geoJson attributes
         pointToLayer: function(feature, latlng){
             return pointToLayer(feature, latlng, list);
         }
     }).addTo(map);
 };
-//update propportional symbols functions
+
 function updatePropSymbols(map, attribute){
 	map.eachLayer(function(layer){
-        //used to also contain the 0 values, where these will not be skipped
 		if (layer.feature){
             //access feature properties
             var props = layer.feature.properties;
             //update each feature's radius based on new attribute values
+            
             var radius = calcPropRadius(props[attribute]);
 
-            //set the radius of the layer from the calcPropRadius
             layer.setRadius(radius);
 
             //add city to popup content string
@@ -227,7 +216,6 @@ function updatePropSymbols(map, attribute){
 
             //add formatted attribute to panel content string
             var year = attribute.split("Built_")[1];
-            //add the popup content of the structures built
             popupContent += "<b>Structures built in the " + year + ":</b> " + props[attribute];
 
             //update popup content
@@ -236,15 +224,12 @@ function updatePropSymbols(map, attribute){
         };
 	});
 };
-//create the sequence controls
+
 function createSequenceControls(list){
     //create range input element (slider)
-    //add the decade to show which decade the symbols are currently on
     $('#panel').append('<div class="decade"> </div>');
-    //input the slider
     $('#panel').append('<input class="range-slider" type="range">');
-    //slider attributes
-    //there are 13 time intervals, so have 0-12 be the range and increment by 1
+
     $('.range-slider').attr({
         max: 12,
         min: 0,
@@ -253,73 +238,66 @@ function createSequenceControls(list){
     });
     
 
-    //add the forward and reverse buttons
+
     $('#panel').append('<button class="step" id="reverse" title="Reverse"><<</button>');
     $('#panel').append('<button class="step" id="forward" title="Forward">>></button>');
-    //create the decade variable to find the year from the list variable. 
     var decade = list[0].split("Built_")[1]; 
-    //add it onto the webpage
     $('.decade').html(decade);
     
-    //click on the forward or reverse button functions
     $('.step').click(function(){
 		//get the old index value
 		var index = $('.range-slider').val();
-		//increment or decriment depending on button clicked
+		//Step 6: increment or decriment depending on button clicked
 		if ($(this).attr('id') == 'forward'){
 			index++;
-		    //if past the last attribute, wrap around to first attribute
+			//Step 7: if past the last attribute, wrap around to first attribute
 			index = index > 12 ? 0 : index;
 		} else if ($(this).attr('id') == 'reverse'){
 			index--;
-			//if past the first attribute, wrap around to last attribute
+			//Step 7: if past the first attribute, wrap around to last attribute
 			index = index < 0 ? 12 : index;
         };
 
-		//update slider
+		//Step 8: update slider
         $('.range-slider').val(index);
-        //update the decade based on slider
+        
         var decade = list[index].split("Built_")[1]; 
         $('.decade').html(decade);
-		//pass new attribute to update symbols
+		//Step 9: pass new attribute to update symbols
         updatePropSymbols(map, list[index]);
 	});
 
 	//Step 5: input listener for slider
 	$('.range-slider').on('input', function(){
-		//get the new index value
+		//Step 6: get the new index value
         var index = $(this).val();
-		//increment or decriment depending on button clicked
+		//Step 6: increment or decriment depending on button clicked
 		if ($(this).attr('id') == 'forward'){
 			index++;
-			//if past the last attribute, wrap around to first attribute
+			//Step 7: if past the last attribute, wrap around to first attribute
 			index = index > 12 ? 0 : index;
 		} else if ($(this).attr('id') == 'reverse'){
 			index--;
-			//if past the first attribute, wrap around to last attribute
+			//Step 7: if past the first attribute, wrap around to last attribute
 			index = index < 0 ? 12 : index;
         };
-        //update the decade based on slider
         var decade = list[index].split("Built_")[1]; 
         $('.decade').html(decade);
-		//pass new attribute to update symbols
+		//Step 9: pass new attribute to update symbols
         updatePropSymbols(map, list[index]);
         
 	});
 };
-//get the data and retrieves all of the data from all of the functions
+
 function getData(map){
-    //load the geoJson
+    //load the data
     $.ajax("data/skyscrapers.geojson", {
         dataType: "json",
         success: function(response){
-            //creates the variable list and has it be processed
             var list = processData(response);
-            //find the minimum value
+
             minValue = calcMinValue(response);
-            //proportional symbols are created based on the list
             createPropSymbols(response, list);
-            //sequence controls can now be implemented
             createSequenceControls(list);
 
         }
@@ -327,5 +305,13 @@ function getData(map){
     });
 };
 
-//create the map when ready
+function ClickImage(feature, layer){
+    var city = feature.properties.City
+    if(city == "Chicago"){
+        $('#skyline').append('<img src = "images\chicago">'),
+        console.log("You Clicked Me!")
+    }
+};
+
+
 $(document).ready(createMap);
