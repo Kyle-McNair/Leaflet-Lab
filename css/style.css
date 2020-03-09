@@ -1,8 +1,9 @@
 #mapid {
 	height: 600px;
-    width: 65%;
-    float: left;
-    position: relative
+    width: 55%;
+    position: relative;
+    display: inline-block;
+    border: solid  rgb(109, 106, 89) 1px;
 }
 #panel {
     width: 80%;
@@ -13,11 +14,12 @@
     margin-right: auto;
 }
 #sidebar{
-    width: 30vw;
-    height: 60vh;
+    width: 42vw;
+    height: 55vh;
     vertical-align: top;
     float: right;
     justify-content: center;
+    border: gray 2px;
 }
 
 #description{
@@ -27,10 +29,17 @@
     margin-bottom: 30px;
     margin-left: 10px;
     margin-top: 15px;
-    width: 65%
+    width: auto
 }
 .decade{
-    height: 15pz
+    font-family: 'Encode Sans', sans-serif;
+    font-size: 1.5em;
+}
+#chartyear{
+    margin-top: -10px;
+    margin-bottom: -20px;
+    text-align: center;
+    font-size: 1.25em;
 }
 #skyline{
     margin-top: 10px;
@@ -38,38 +47,68 @@
     font-size: 1.5em;
 }
 #CityImage{
-    margin-top: 5px;
+    margin-left: 25px;
+    margin-top: -30px;
+    text-align: center;
     height: auto;
-    max-width: 90%;
-    min-height: 40%;
+    max-width: 45%;
+    min-height: 25%;
     overflow: hidden;
+    float: left
 }
 #info{
     font-size: 1em;
     text-align: center;
 }
 #author{
-    float: left
+    float: left;
+    font-size: 0.7em
 }
+
+.legend{
+    width: 55%;
+    height: 150px;
+    background-color: black;
+    border: solid rgb(109, 106, 89) 1px; 
+    border-radius: 25px;
+    font-family: 'Encode Sans', sans-serif;
+    font-size: 1.2em;
+    justify-content: center;
+    text-align: center;
+}
+.sequence-control-container {
+    width: 350px;
+    height: 20px;
+    background-color: black;
+    padding: 10px;
+    padding-bottom: 45px;
+    text-align: center;
+    border: solid  rgb(109, 106, 89) 1px;
+    border-radius: 25px
+}
+#attribute-legend{
+    margin-left: 15px;
+    margin-top: 30px;
+    overflow: visible;
+}
+
 .range-slider {
     width: 80%;
 }
 
-.step {
-	width: 8%;
-}
-
-.step img {
-	width: 100%;
-}
-
-
 #forward {
     float: right;
+    height: 20px;
+    width: 30px;
+    border: solid  rgb(109, 106, 89) 1px;
 }
+
 
 #reverse {
     float: left;
+    height: 20px;
+    width: 30px;
+    border: solid  rgb(109, 106, 89) 1px;
 }
 
 h1{
@@ -86,7 +125,22 @@ h2{
 }
 body {
 
-	color: #FFF7CC;
+    /* color: #FFF7CC; */
+    color: #c5bdc3;
     background-color:black;
     font-family: 'Encode Sans', sans-serif
   }
+.header-bar{
+    height: 2px;
+    width: 100%;
+    background-color: #c5bdc3;
+    filter:drop-shadow(0 0 2px rgb(109, 106, 89));
+}
+.bar { 
+    fill: #31353f; 
+    /* stroke:  #FFF7CC */
+}
+#plot{
+    margin-left: 10px;
+
+}

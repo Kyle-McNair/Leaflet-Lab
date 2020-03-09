@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-            <title>Activity 6</title>
+            <title>Skyscrapers in North America</title>
 
         <!--put your external stylesheet links here-->
         <link rel="stylesheet" href="css/style.css">
@@ -24,29 +24,37 @@
         <div class = title>
             <h1>High Rises in North America</h1>
         </div>
-        <!-- Input the leaflet map -->
-        <div id="mapid" style = "outline-color: #FFF7CC;"></div>
-        <!-- Side Panel to have the photos and panel bar -->
-        <div id = "sidebar">
-            <div style = "text-align: center;">Click on any of the given cities to see more details</div>
-            <div id="panel"></div>
-            <div id="skyline"></div>
-            <div id="info"></div>
-        </div>
-        <!-- Description below the leaflet map -->
+        <div class = "header-bar"></div>
         <div id = "description">
             Cities in North America display from little, to hundreds of high rise buildings. While there is no distinct classification of how tall a skyscraper is, the universal height to be considered a "skyscraper"
             is over 100 meters (~330 feet). This map shows a time series of the amount of high rise structures built in each decade. The time spans from the 1890s, all the way to the 2010s. You will find New York to
             be the dominant home of skyscrapers, but also see other cities build dozens as time passes.
         </div>
-        <div id="author">Created by Kyle McNair</div>
+        <!-- Input the leaflet map -->
+        <div id="mapid" style = "outline-color: #FFF7CC;"></div>
+        <!-- Side Panel to have the photos and panel bar -->
+        <div id = "sidebar">
+            <div id = "chartyear" style = "text-align: center;"></div>
+            <div id= "plot"></div>
+            <div id = "clickguider" style = "text-align: center;">Click on any of the given cities to see more details</div>
+        <div id="panel"></div>
+        <div id="skyline"></div>
+        <div id="info"></div>
+        </div>
+        <!-- Description below the leaflet map -->
+        <div id="author">Created by Kyle McNair<pre></pre> Data gathered by 
+            <a href = "https://www.skyscrapercenter.com/" target = "blank">The Skyscraper Center</a>.</a></div>
+        
         
         
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
   crossorigin=""></script>
         <script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
+        <script type="text/javascript" src="lib/d3.min.js"></script>
         <script type="text/javascript" src="lib/jquery-3.4.1.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
+        <!-- <script type="text/javascript" src="js/barplot.js"></script> -->
+        
     </body>
 </html>
