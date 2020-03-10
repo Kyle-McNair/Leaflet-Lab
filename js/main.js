@@ -1,6 +1,9 @@
 //declare vars globally so all functions have access
 var map;
+//datastats used to store the circle sizes for the legend
 var dataStats = {};
+//these data lists are for the d3 bar chart plotting. 
+//used to later iterate in the change sequence function.
 var data1890 = [{"City":"New York City","Total":3},{"City":"Chicago","Total":0},{"City":"Miami","Total":0},{"City":"Houston","Total":0},{"City":"Los Angeles","Total":0},{"City":"San Francisco","Total":0},{"City":"Seattle","Total":0},{"City":"Boston","Total":0},{"City":"Dallas","Total":0},{"City":"Atlanta","Total":0},{"City":"Las Vegas","Total":0},{"City":"Philadelphia","Total":0},{"City":"Toronto","Total":0},{"City":"Montreal","Total":0},{"City":"Calgary","Total":0},{"City":"Mexico City","Total":0}]
 var data1900 = [{"City":"New York City","Total":13},{"City":"Chicago","Total":0},{"City":"Miami","Total":0},{"City":"Houston","Total":0},{"City":"Los Angeles","Total":0},{"City":"San Francisco","Total":0},{"City":"Seattle","Total":0},{"City":"Boston","Total":0},{"City":"Dallas","Total":0},{"City":"Atlanta","Total":0},{"City":"Las Vegas","Total":0},{"City":"Philadelphia","Total":1},{"City":"Toronto","Total":0},{"City":"Montreal","Total":0},{"City":"Calgary","Total":0},{"City":"Mexico City","Total":0}]
 var data1910 = [{"City":"New York City","Total":26},{"City":"Chicago","Total":0},{"City":"Miami","Total":0},{"City":"Houston","Total":0},{"City":"Los Angeles","Total":0},{"City":"San Francisco","Total":0},{"City":"Seattle","Total":1},{"City":"Boston","Total":1},{"City":"Dallas","Total":0},{"City":"Atlanta","Total":0},{"City":"Las Vegas","Total":0},{"City":"Philadelphia","Total":1},{"City":"Toronto","Total":0},{"City":"Montreal","Total":0},{"City":"Calgary","Total":0},{"City":"Mexico City","Total":0}]
@@ -14,7 +17,7 @@ var data1980 = [{"City":"New York City","Total":536},{"City":"Chicago","Total":1
 var data1990 = [{"City":"New York City","Total":597},{"City":"Chicago","Total":204},{"City":"Miami","Total":23},{"City":"Houston","Total":62},{"City":"Los Angeles","Total":57},{"City":"San Francisco","Total":65},{"City":"Seattle","Total":28},{"City":"Boston","Total":35},{"City":"Dallas","Total":36},{"City":"Atlanta","Total":42},{"City":"Las Vegas","Total":19},{"City":"Philadelphia","Total":40},{"City":"Toronto","Total":71},{"City":"Montreal","Total":31},{"City":"Calgary","Total":39},{"City":"Mexico City","Total":21}]
 var data2000 = [{"City":"New York City","Total":712},{"City":"Chicago","Total":270},{"City":"Miami","Total":76},{"City":"Houston","Total":80},{"City":"Los Angeles","Total":59},{"City":"San Francisco","Total":78},{"City":"Seattle","Total":37},{"City":"Boston","Total":42},{"City":"Dallas","Total":40},{"City":"Atlanta","Total":64},{"City":"Las Vegas","Total":49},{"City":"Philadelphia","Total":48},{"City":"Toronto","Total":124},{"City":"Montreal","Total":34},{"City":"Calgary","Total":48},{"City":"Mexico City","Total":42}]
 var data2010 = [{"City":"New York City","Total":878},{"City":"Chicago","Total":327},{"City":"Miami","Total":116},{"City":"Houston","Total":102},{"City":"Los Angeles","Total":74},{"City":"San Francisco","Total":94},{"City":"Seattle","Total":59},{"City":"Boston","Total":48},{"City":"Dallas","Total":46},{"City":"Atlanta","Total":71},{"City":"Las Vegas","Total":54},{"City":"Philadelphia","Total":57},{"City":"Toronto","Total":267},{"City":"Montreal","Total":47},{"City":"Calgary","Total":66},{"City":"Mexico City","Total":69}]
-
+//decadeList stores the lists above.
 var decadeList = [data1890, data1900, data1910, data1920, data1930, data1940, data1950, data1960, data1970, data1980, data1990, data2000, data2010]
 
 
@@ -28,6 +31,7 @@ function createMap(){
         zoom: 4,
         maxZoom: 6
     });
+    //customized mapbox tile used
     L.tileLayer('https://api.mapbox.com/styles/v1/mcnairk94/ck7i2bsfy13se1ilosdb1v0ch/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWNuYWlyazk0IiwiYSI6ImNrNmpxdDI1eDAwZjUzbG15OGFnZGxyd2EifQ.7XQ2utbtmE1Vqu4LbrcXyw', { 
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 6,
@@ -41,6 +45,7 @@ function createMap(){
 function calcStats(data){
     //create empty array to store all data values
     var allValues = [];
+    //another empty array to calculate the max/min/mean of the values. allValues list wouldn't work because of ignoring the 0 values.
     var newValues = [];
     //loop through each city
     for(var city of data.features){
@@ -60,11 +65,15 @@ function calcStats(data){
         for(var year = 1890; year <= 2010; year+=10){
             //get population for current year
             var value = city.properties["Built_"+ String(year)+"s"];
-            //add value to array
+            //add ANY value to array even the zeros
             newValues.push(value)
         }
     }
     //get min, max, mean stats for our array
+    //since the max of my dataset is 169, the circle on the legend would be too large and "noisy" to show on the map
+    //max value of 50 is chosen instead
+
+    //min value is 1 to show 1 structure, as values of 0 do not appear on the map.
     dataStats.min = 1//Math.min(...newValues);
     dataStats.max = 50//Math.max(...newValues);
 
@@ -149,7 +158,9 @@ function pointToLayer(feature, latlng, list){
     click: function(){
         //skyline tag used to implement the cities being added
         $("#skyline").html(cities);
-        //if statement to go through each city, and inserts an image into the div tag of the #skyline.
+        //if statement to go through each city, and inserts an image and some more facts into the div tag of the #skyline/#info.
+
+        //the .empty() function takes away the tips and clickguider div so that the new divs (#info & #skyline) can appear.
         if(cities == "Atlanta"){
             $('#tips').empty();
             $('#clickguider').empty();
@@ -306,6 +317,7 @@ function updatePropSymbols(map, attribute){
             //update popup content
             popup = layer.getPopup();
             popup.setContent(popupContent).update();
+            //updates the decade label in the legend
             $('#temporal-legend').html("100m+ Structures Built <br>During the " + year);
 
 
@@ -327,12 +339,11 @@ function createSequenceControls(list){
             // ... initialize other DOM elements
             $(container).append('<div class="decade"> </div>');
             $(container).append('<input class="range-slider" type="range">');
-
+            //forward and reverse buttons are now images
             $(container).append('<img class="step" id="reverse" title="Reverse" src="images/reverse.png"></img>');
             $(container).append('<img class="step" id="forward" title="Forward" src="images/forward.png"></img>');
 
-            // $('#forward').html('<img src="images/forward.png">');
-
+            //if you double click on the div, it will not have the map zoom. 
             L.DomEvent.disableClickPropagation(container);
 
             return container;
@@ -353,9 +364,11 @@ function createSequenceControls(list){
     var decade = list[0].split("Built_")[1]; 
     //add it onto the webpage
     $('.decade').html(decade);
-
+    //baryear starts out with the first decade of decadeList to plot out the d3 bar plot
     var baryear = decadeList[0];
+    //d3 plot is brought up to the default 1890 decade when first opened
     $('#plot').html(barChart(baryear));
+    //default decade text
     $("#chartyear").html('<p>Total 100m+ Structures Built in 1890</p>');
     //click on the forward or reverse button functions
     $('.step').click(function(){
@@ -377,12 +390,16 @@ function createSequenceControls(list){
         //update the decade based on slider
         var decade = list[index].split("Built_")[1]; 
         $('.decade').html(decade);
+        //update the d3 plot based on the slier
         var baryear = decadeList[index];
         $("#chartyear").html('<p>Total 100m+ Structures Built from 1890 - '+decade+'</p>');
+        //if slider is at 0, it will bring the label to just 1890
         if(index ===0){
             $("#chartyear").html('<p>Total 100m+ Structures Built in 1890</p>')
         }
+        //d3 plot is taken away
         $('#plot').empty();
+        //d3 plot is added again based on the decade the slider changed to.
         $('#plot').html(barChart(baryear));
 		//pass new attribute to update symbols
         updatePropSymbols(map, list[index]);
@@ -408,11 +425,14 @@ function createSequenceControls(list){
         var decade = list[index].split("Built_")[1]; 
         $('.decade').html(decade);
         $("#chartyear").html('<p>Total 100m+ Structures Built from 1890 - '+decade+'</p>');
+        //if slider is at 0, it will bring the label to just 1890
         if(index ===0){
             $("#chartyear").html('<p>Total 100m+ Structures Built in 1890</p>')
         }
         var baryear = decadeList[index];
+        //d3 plot is taken away
         $('#plot').empty();
+        //d3 plot is added again based on the decade the slider changed to.
         $('#plot').html(barChart(baryear));
 		//pass new attribute to update symbols
         updatePropSymbols(map, list[index]);
@@ -423,6 +443,7 @@ function createSequenceControls(list){
 };
 
 function createLegend(){
+    //add the legend div element to the bottom right of the leaflet map
     var LegendControl = L.Control.extend({
         options: {
             position: 'bottomright'
@@ -431,37 +452,43 @@ function createLegend(){
         onAdd: function () {
             // create the control container with a particular class name
             var container = L.DomUtil.create('div', 'legend');
-
+            //adds the legend title
             $(container).append('<div id="temporal-legend">100m+ Structures Built <br>During the 1890s</div>')
-
+            //svg is used to bring in the circles and text
             var svg = '<svg id="attribute-legend">';
-
+            //circles variable helps go through the dataStats
             var circles = ["max", "mean", "min"];
-
+            //since the max and min were manual, the for loop was avoided, and if statements are used to create the svg circle and label of each value
+            //max value
             if(circles[0]){
                 var radius = calcPropRadius(dataStats[circles[0]]);
                 var cy = 60 - radius;
+                //creating the svg circle based on the radius
                 svg += '<circle class="legend-circle" id="' + circles[0] + '" r="' + radius + '"cy="' + cy + '" fill="#d4af37" fill-opacity="0.8" stroke="#000000" cx="35"/>';
+                //text is now added
                 svg += '<text fill="#c5bdc3" id="' + circles[0] + '-text" x="80" y="1">' + Math.round(dataStats[circles[0]]*100)/100 + " structures" + '</text>';
                 };
+            //mean value -- same methodology applied from the max value
             if(circles[1]){
                 var radius = calcPropRadius(dataStats[circles[1]]);
                 var cy = 60 - radius;
                 svg += '<circle class="legend-circle" id="' + circles[1] + '" r="' + radius + '"cy="' + cy + '" fill="#d4af37" fill-opacity="0.8" stroke="#000000" cx="35"/>';
                 svg += '<text fill="#c5bdc3" id="' + circles[1] + '-text" x="80" y="30">' + Math.round(dataStats[circles[1]]*100)/100 + " structures" + '</text>';
                 };
+            //min value -- same methodology applied from the max and mean values
             if(circles[2]){
                 var radius = calcPropRadius(dataStats[circles[2]]);
                 var cy = 60 - radius;
                 svg += '<circle class="legend-circle" id="' + circles[2] + '" r="' + radius + '"cy="' + cy + '" fill="#d4af37" fill-opacity="0.8" stroke="#000000" cx="35"/>';
                 svg += '<text fill="#c5bdc3" id="' + circles[2] + '-text" x="80" y="55">' + Math.round(dataStats[circles[2]]*100)/100 + " structure" + '</text>';
                 }
+            //close out the svg tag so all 3 circles and labels appear and append to the container.
             svg += "</svg>";
             $(container).append(svg)
             return container;
         }
     });
-
+    //adds the legend to the map.
     map.addControl(new LegendControl());
 
 };
@@ -480,32 +507,33 @@ function getData(){
             createPropSymbols(response, list);
             //sequence controls can now be implemented
             createSequenceControls(list);
+            //create the legend
             createLegend(list)
+            //calculate the original max, mean, and min of all the values
             calcStats(response);
 
         }
     
     });
 };
+//creating the bar plot using d3
 function barChart(data){
 
-
+    //set the parameters of the dimensions of the bar plot
     var margin = {top: 20, right: 20, bottom: 30, left: 100},
     width = 600 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 
-    // set the ranges
+    //set y ranges
     var y = d3.scaleBand()
           .range([height, 0])
           .padding(0.1);
-
+    //set the x ranges
     var x = d3.scaleLinear()
           .range([0, width]);
-          
-    // append the svg object to the body of the page
-    // append a 'group' element to 'svg'
-    // moves the 'group' element to the top left margin
+    //use the #plot div to bring in the bar plot
+    //like the legend, svg is also used.
     var svg = d3.select("#plot").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -513,50 +541,49 @@ function barChart(data){
         .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
 
-    // format the data
+    //format the data
     data.forEach(function(d) {
         d.Total = +d.Total;
     });
+    //sort the data of highest to lowest based on total count in each decade
     data.sort(function(a, b) {
         return a.Total - b.Total;
       });
-    // Scale the range of the data in the domains
+    //Scale the range of the x and y data in the domains
     x.domain([0, 1000])
-    // x.domain([0, d3.max(data, function(d){ return d.Total; })])
     y.domain(data.map(function(d) { return d.City; }));
 
 
-    // append the rectangles for the bar chart
+    // append the rectangles and labels for the bar chart
     var bars = svg.selectAll(".bar")
         .data(data)
         .enter()
         .append("g")
-    bars.append("rect")
-        .transition()
+    bars.append("rect") //bring in rectangles as the bar
+        .transition() //transitions each bar after changing the decade
         .ease(d3.easePolyOut)
-        .duration(500)
+        .duration(500)//half a second to transition
         .attr("class", "bar")
-        .attr("width", function(d) {return x(Math.round(d.Total)); } )
+        .attr("width", function(d) {return x(Math.round(d.Total)); } )//total count of structures is used to have length of rectangle of the bars
         .attr("y", function(d) { return y(d.City); })
-        .attr("height", y.bandwidth())
+        .attr("height", y.bandwidth())//height of each bar/rectangle
         .text(function (d) {return d.Total;});
-    bars.append("text")
-        .transition()
+    bars.append("text")//used to bring in labels of the total values
+        .transition()//transitions with the rectangles as the bar
         .ease(d3.easePolyOut)
-        .duration(500)
+        .duration(500)//half a second to transition
         .attr("class", "label")
-        //y position of the label is halfway down the bar
-        .attr("y", function (d) {return y(d.City) + y.bandwidth() / 2 + 4;})
-        //x position is 3 pixels to the right of the bar
+        .attr("y", function (d) {return y(d.City) + y.bandwidth() / 2 + 4;})//have the label align in the middle
+        //x position is 10 pixels to the right of the bar
         .attr("x", function (d) {return x(d.Total) + 10;})
         .text(function (d) {return d.Total;});
 
-    // add the x Axis
+    //add the x Axis
     svg.append("g")
           .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x))
 
-     // add the y Axis
+     //add the y Axis
     svg.append("g")
         .call(d3.axisLeft(y));
 };
