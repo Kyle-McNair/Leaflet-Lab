@@ -10,12 +10,6 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
         <link href="https://fonts.googleapis.com/css?family=Encode+Sans&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="lib/leaflet/leaflet.css">
-        <!--[if IE<9]>
-            <link rel="stylesheet" href="css/style.ie.css">
-        <![endif]-->
-
-         <!--you can also place internal styles here;
-             place these within <style> tags-->
 
     </head>
 
@@ -24,7 +18,9 @@
         <div class = title>
             <h1>High Rises in North America</h1>
         </div>
+        <!-- Line to separate site title and interface -->
         <div class = "header-bar"></div>
+        <!-- Description of the site -->
         <div id = "description">
             Cities in North America display from little, to hundreds of high rise buildings. While there are no distinct classifications of how tall a skyscraper needs to be, the universal height to be considered a "skyscraper"
             is over 100 meters (~330 feet). This map shows a time series of the amount of high rise structures built in each decade. The time spans from the 1890, all the way to the 2010s (latest year 2019). You will find New York to
@@ -35,18 +31,31 @@
         <div id="mapid" style = "outline-color: #FFF7CC;"></div>
         <!-- Side Panel to have the photos and panel bar -->
         <div id = "sidebar">
+            <!-- Chart year input -->
             <div id = "chartyear" style = "text-align: center;"></div>
+            <!-- D3 bar plot -->
             <div id= "plot"></div>
-            <div id = "clickguider" style = "text-align: center;">Click on any of the given cities to see more details</div>
+            <!-- The "How To" -->
+            <div id = "tips">
+                Tips & Tricks:
+            </div>
+            <div id = "clickguider" style = "text-align: left;">
+                -To see the proportional amount of 100m+ structures built per decade, use the forward and/or reverse button. <br><br>
+                -The chart above changes by decade, and accumulates the total amount of 100m+ structures built from 1890 to chosen decade.<br><br>
+                -Click on any of the given cities to track the amount of 100m+ structures built per decade.<br><br>
+                -The "Popup" from any selected city will remain open until closed out.<br><br>
+                -More information will appear here once you select any of the given cities.
+            </div>
+                
+        <!-- These elements appear based on what city has been selected -->
         <div id="panel"></div>
         <div id="skyline"></div>
         <div id="info"></div>
         </div>
-        <!-- Description below the leaflet map -->
-        <div id="author">Created by <a href = "https://kyle-mcnair.github.io/" target = "blank">Kyle McNair</a><pre></pre> Building data gathered from 
-            <a href = "https://www.skyscrapercenter.com/" target = "blank">The Skyscraper Center</a><pre></pre> Photos gathered from
+        <!-- Sources and Credentials -->
+        <div id="author">Created by <a href = "https://kyle-mcnair.github.io/" target = "blank">Kyle McNair</a> | Last Updated: March 10, 2020 | Best viewed on a non mobile device<pre></pre> Building data gathered from 
+            <a href = "https://www.skyscrapercenter.com/" target = "blank">The Skyscraper Center</a> | Photos gathered from
             <a href = "https://www.pexels.com/" target = "blank">Pexels.com</a>.</a></div>
-        
         
         
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
@@ -56,7 +65,6 @@
         <script type="text/javascript" src="lib/d3.min.js"></script>
         <script type="text/javascript" src="lib/jquery-3.4.1.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-        <!-- <script type="text/javascript" src="js/barplot.js"></script> -->
         
     </body>
 </html>

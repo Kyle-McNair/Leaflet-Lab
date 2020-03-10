@@ -151,99 +151,115 @@ function pointToLayer(feature, latlng, list){
         $("#skyline").html(cities);
         //if statement to go through each city, and inserts an image into the div tag of the #skyline.
         if(cities == "Atlanta"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/Atlanta.jpg">');
-            $('#info').html('<p><b>Total Structures Built 1890-2019 (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built 1890-2019 (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> Bank of America Plaza - 312m (1,023ft)</p>');
         }
         else if(cities == "Boston"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/Boston.jpg">');
-            $('#info').html('<p><b>Total Structures Built 1890-2019 (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built 1890-2019 (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> John Hancock Tower - 240m (790ft)</p>');
         }
         else if(cities == "Calgary"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/Calgary.jpg">');
-            $('#info').html('<p><b>Total Structures Built 1890-2019 (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built 1890-2019 (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> Brookfield Place Tower One - 247m (810ft)</p>');
         }
         else if(cities == "Chicago"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/Chicago.jpg">');
-            $('#info').html('<p><b>Total Structures Built 1890-2019 (100m+):</b>   '+ feature.properties.Total_Structures_100m+ '</p>');
-            $('#info').append('<p><b>allest Structure:</b> Willis Tower - 442m (1,451ft)</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built 1890-2019 (100m+):</b>   '+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').append('<p><b>Tallest Structure:</b> Willis Tower - 442m (1,451ft)</p>');
         }
         else if(cities == "Dallas"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/Dallas.jpg">');
-            $('#info').html('<p><b>Total Structures Built 1890-2019 (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built 1890-2019 (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> Bank of America Plaza - 280m (921ft)</p>');
         }
         else if(cities == "Houston"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/Houston.jpg">');
-            $('#info').html('<p><b>Total Structures Built 1890-2019 (100m+):</b>   '+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built 1890-2019 (100m+):</b>   '+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> JPMorgan Chase Tower - 305m (1,002ft)</p>');
         }
         else if(cities == "Las Vegas"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/LasVegas.jpg">');
-            $('#info').html('<p><b>Total Structures Built 1890-2019 (100m+):</b>   '+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built 1890-2019 (100m+):</b>   '+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> The Palazzo - 195m (642ft)</p>');
         }
         else if(cities == "Los Angeles"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/LosAngeles.jpg">');
-            $('#info').html('<p><b>Total Structures Built 1890-2019 (100m+):</b>   '+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built 1890-2019 (100m+):</b>   '+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> Wilshire Grand Center - 335m (1102ft)</p>');
         }
         else if(cities == "Mexico City"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/MexicoCity.jpg">');
-            $('#info').html('<p><b>Total Structures Built 1890-2019 (100m+):</b>   '+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built 1890-2019 (100m+):</b>   '+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> Torre Reforma - 246m (807ft)</p>');
         }
         else if(cities == "Miami"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/Miami.jpg">');
-            $('#info').html('<p><b>Total Structures Built 1890-2019 (100m+):</b>   '+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built 1890-2019 (100m+):</b>   '+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> Panorama Tower - 251m (827ft)</p>');
         }
         else if(cities == "Montreal"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/Montreal.jpg">');
-            $('#info').html('<p><b>Total Structures Built (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> Le 1250 Boulevard Rene-Levesque - 226m (743ft)</p>');
         }
         else if(cities == "New York City"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/NewYorkCity.jpg">');
-            $('#info').html('<p><b>Total Structures Built (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> One World Trade Center - 546m (1,792ft)</p>');
         }
         else if(cities == "Philadelphia"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/Philadelphia.jpg">');
-            $('#info').html('<p><b>Total Structures Built (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> Comcast Technology Center - 341m (1,120ft)</p>');
         }
         else if(cities == "San Francisco"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/SanFrancisco.jpg">');
-            $('#info').html('<p><b>Total Structures Built (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> Salesforce Tower - 326m (1,070ft)</p>');
         }
         else if(cities == "Seattle"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/Seattle.jpg">');
-            $('#info').html('<p><b>Total Structures Built (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> Columbia Center - 284m (933ft)</p>');
         }
         else if(cities == "Toronto"){
+            $('#tips').empty();
             $('#clickguider').empty();
             $('#skyline').append('<img id="CityImage" src = "images/Toronto.jpg">');
-            $('#info').html('<p><b>Total Structures Built (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
+            $('#info').html('<p><b>Total 100m+ Structures Built (100m+):   </b>'+ feature.properties.Total_Structures_100m+ '</p>');
             $('#info').append('<p><b>Tallest Structure:</b> First Canadian Place - 355m (1,165ft)</p>');
         }
     }
@@ -285,12 +301,12 @@ function updatePropSymbols(map, attribute){
             //add formatted attribute to panel content string
             var year = attribute.split("Built_")[1];
             //add the popup content of the structures built
-            popupContent += "<b>Structures built in the " + year + ":</b> " + props[attribute];
+            popupContent += "<b>100m+ Structures built in the " + year + ":</b> " + props[attribute];
 
             //update popup content
             popup = layer.getPopup();
             popup.setContent(popupContent).update();
-            $('#temporal-legend').html("Structures Built <br>During the " + year);
+            $('#temporal-legend').html("100m+ Structures Built <br>During the " + year);
 
 
         };
@@ -340,7 +356,7 @@ function createSequenceControls(list){
 
     var baryear = decadeList[0];
     $('#plot').html(barChart(baryear));
-    $("#chartyear").html('<p>Total Structures Built in 1890</p>');
+    $("#chartyear").html('<p>Total 100m+ Structures Built in 1890</p>');
     //click on the forward or reverse button functions
     $('.step').click(function(){
 		//get the old index value
@@ -362,9 +378,9 @@ function createSequenceControls(list){
         var decade = list[index].split("Built_")[1]; 
         $('.decade').html(decade);
         var baryear = decadeList[index];
-        $("#chartyear").html('<p>Total Structures Built from 1890 - '+decade+'</p>');
+        $("#chartyear").html('<p>Total 100m+ Structures Built from 1890 - '+decade+'</p>');
         if(index ===0){
-            $("#chartyear").html('<p>Total Structures Built in 1890</p>')
+            $("#chartyear").html('<p>Total 100m+ Structures Built in 1890</p>')
         }
         $('#plot').empty();
         $('#plot').html(barChart(baryear));
@@ -391,9 +407,9 @@ function createSequenceControls(list){
         //update the decade based on slider
         var decade = list[index].split("Built_")[1]; 
         $('.decade').html(decade);
-        $("#chartyear").html('<p>Total Structures Built from 1890 - '+decade+'</p>');
+        $("#chartyear").html('<p>Total 100m+ Structures Built from 1890 - '+decade+'</p>');
         if(index ===0){
-            $("#chartyear").html('<p>Total Structures Built in 1890</p>')
+            $("#chartyear").html('<p>Total 100m+ Structures Built in 1890</p>')
         }
         var baryear = decadeList[index];
         $('#plot').empty();
@@ -416,7 +432,7 @@ function createLegend(){
             // create the control container with a particular class name
             var container = L.DomUtil.create('div', 'legend');
 
-            $(container).append('<div id="temporal-legend">Structures Built <br>During the 1890s</div>')
+            $(container).append('<div id="temporal-legend">100m+ Structures Built <br>During the 1890s</div>')
 
             var svg = '<svg id="attribute-legend">';
 
@@ -426,19 +442,19 @@ function createLegend(){
                 var radius = calcPropRadius(dataStats[circles[0]]);
                 var cy = 60 - radius;
                 svg += '<circle class="legend-circle" id="' + circles[0] + '" r="' + radius + '"cy="' + cy + '" fill="#d4af37" fill-opacity="0.8" stroke="#000000" cx="35"/>';
-                svg += '<text fill="#c5bdc3" id="' + circles[0] + '-text" x="85" y="1">' + Math.round(dataStats[circles[0]]*100)/100 + "(+) structures" + '</text>';
+                svg += '<text fill="#c5bdc3" id="' + circles[0] + '-text" x="80" y="1">' + Math.round(dataStats[circles[0]]*100)/100 + " structures" + '</text>';
                 };
             if(circles[1]){
                 var radius = calcPropRadius(dataStats[circles[1]]);
                 var cy = 60 - radius;
                 svg += '<circle class="legend-circle" id="' + circles[1] + '" r="' + radius + '"cy="' + cy + '" fill="#d4af37" fill-opacity="0.8" stroke="#000000" cx="35"/>';
-                svg += '<text fill="#c5bdc3" id="' + circles[1] + '-text" x="85" y="30">' + Math.round(dataStats[circles[1]]*100)/100 + " structures" + '</text>';
+                svg += '<text fill="#c5bdc3" id="' + circles[1] + '-text" x="80" y="30">' + Math.round(dataStats[circles[1]]*100)/100 + " structures" + '</text>';
                 };
             if(circles[2]){
                 var radius = calcPropRadius(dataStats[circles[2]]);
                 var cy = 60 - radius;
                 svg += '<circle class="legend-circle" id="' + circles[2] + '" r="' + radius + '"cy="' + cy + '" fill="#d4af37" fill-opacity="0.8" stroke="#000000" cx="35"/>';
-                svg += '<text fill="#c5bdc3" id="' + circles[2] + '-text" x="85" y="55">' + Math.round(dataStats[circles[2]]*100)/100 + " structure" + '</text>';
+                svg += '<text fill="#c5bdc3" id="' + circles[2] + '-text" x="80" y="55">' + Math.round(dataStats[circles[2]]*100)/100 + " structure" + '</text>';
                 }
             svg += "</svg>";
             $(container).append(svg)
@@ -505,27 +521,40 @@ function barChart(data){
         return a.Total - b.Total;
       });
     // Scale the range of the data in the domains
-    x.domain([0, d3.max(data, function(d){ return d.Total; })])
+    x.domain([0, 1000])
+    // x.domain([0, d3.max(data, function(d){ return d.Total; })])
     y.domain(data.map(function(d) { return d.City; }));
 
 
     // append the rectangles for the bar chart
-    svg.selectAll(".bar")
-          .data(data)
-        .enter().append("rect")
+    var bars = svg.selectAll(".bar")
+        .data(data)
+        .enter()
+        .append("g")
+    bars.append("rect")
         .transition()
-        .duration(1000)
+        .ease(d3.easePolyOut)
+        .duration(500)
         .attr("class", "bar")
         .attr("width", function(d) {return x(Math.round(d.Total)); } )
         .attr("y", function(d) { return y(d.City); })
         .attr("height", y.bandwidth())
- 
+        .text(function (d) {return d.Total;});
+    bars.append("text")
+        .transition()
+        .ease(d3.easePolyOut)
+        .duration(500)
+        .attr("class", "label")
+        //y position of the label is halfway down the bar
+        .attr("y", function (d) {return y(d.City) + y.bandwidth() / 2 + 4;})
+        //x position is 3 pixels to the right of the bar
+        .attr("x", function (d) {return x(d.Total) + 10;})
+        .text(function (d) {return d.Total;});
 
-    
     // add the x Axis
     svg.append("g")
           .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x))
 
      // add the y Axis
     svg.append("g")
